@@ -1,18 +1,8 @@
-# USAGE
-# python flipping.py --image ../images/trex.png
-
-# Import the necessary packages
-import argparse
 import cv2
 
-# Construct the argument parser and parse the arguments
-ap = argparse.ArgumentParser()
-ap.add_argument("-i", "--image", required = True,
-	help = "Path to the image")
-args = vars(ap.parse_args())
 
 # Load the image and show it
-image = cv2.imread(args["image"])
+image = cv2.imread('C:/PythonProjects/PracticalPythonAndOpenCV_Book/images/trex.png')
 cv2.imshow("Original", image)
 
 # Flip the image horizontally
