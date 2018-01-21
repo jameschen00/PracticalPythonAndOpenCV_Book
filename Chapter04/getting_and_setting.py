@@ -2,27 +2,23 @@ import cv2
 
 
 # Load the image and show it
-image = cv2.imread(args["image"])
+image = cv2.imread('C:/PythonProjects/PracticalPythonAndOpenCV_Book/images/trex.png')
 cv2.imshow("Original", image)
 
-# Images are just NumPy arrays. The top-left pixel can be
-# found at (0, 0)
+# Check pixel value at (0, 0)
 (b, g, r) = image[0, 0]
-print("Pixel at (0, 0) - Red: {}, Green: {}, Blue: {}".format(r, g, b))
+print("Pixel at (0, 0) - R: {}, G: {}, B: {}".format(r, g, b))
 
-# Now, let's change the value of the pixel at (0, 0) and
-# make it red
+# Change the pixel value at (0, 0) to red
 image[0, 0] = (0, 0, 255)
 (b, g, r) = image[0, 0]
-print("Pixel at (0, 0) - Red: {}, Green: {}, Blue: {}".format(r, g, b))
+print("Pixel at (0, 0) - R: {}, G: {}, B: {}".format(r, g, b))
 
-# Since we are using NumPy arrays, we can apply slicing and
-# grab large chunks of the image. Let's grab the top-left
-# corner
+# Get the top-left corner
 corner = image[0:100, 0:100]
 cv2.imshow("Corner", corner)
 
-# Let's make the top-left corner of the image green
+# Make the top-left corner green
 image[0:100, 0:100] = (0, 255, 0)
 
 # Show our updated image
