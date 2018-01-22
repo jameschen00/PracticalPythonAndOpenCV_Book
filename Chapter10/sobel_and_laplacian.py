@@ -1,48 +1,31 @@
-# USAGE
-# python sobel_and_laplacian.py --image ../images/coins.png
-
-# Import the necessary packages
 import numpy as np
-import argparse
 import cv2
 
-# Construct the argument parser and parse the arguments
-ap = argparse.ArgumentParser()
-ap.add_argument("-i", "--image", required = True,
-	help = "Path to the image")
-args = vars(ap.parse_args())
 
-# Load the image, convert it to grayscale, and show it
-image = cv2.imread(args["image"])
+# Load the image, convert it to greyscale, and show it
+image = cv2.imread('C:/PythonProjects/PracticalPythonAndOpenCV_Book/images/coins.png')
 image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 cv2.imshow("Original", image)
 
-# Compute the Laplacian of the image
+# Compute the Laplacian of the image (using floats due to positive/negative slopes in colour transitions)
 lap = cv2.Laplacian(image, cv2.CV_64F)
 lap = np.uint8(np.absolute(lap))
 cv2.imshow("Laplacian", lap)
 cv2.waitKey(0)
 
 # Compute gradients along the X and Y axis, respectively
-sobelX = cv2.Sobel(image, cv2.CV_64F, 1, 0)
-sobelY = cv2.Sobel(image, cv2.CV_64F, 0, 1)
+sobel_x = cv2.Sobel(image, cv2.CV_64F, 1, 0)
+sobel_y = cv2.Sobel(image, cv2.CV_64F, 0, 1)
 
-# The sobelX and sobelY images are now of the floating
-# point data type -- we need to take care when converting
-# back to an 8-bit unsigned integer that we do not miss
-# any images due to clipping values outside the range
-# of [0, 255]. First, we take the absolute value of the
-# graident magnitude images, THEN we convert them back
-# to 8-bit unsigned integers
-sobelX = np.uint8(np.absolute(sobelX))
-sobelY = np.uint8(np.absolute(sobelY))
+# Convert to an 8-bit unsigned integer
+sobel_x = np.uint8(np.absolute(sobel_x))
+sobel_y = np.uint8(np.absolute(sobel_y))
 
-# We can combine our Sobel gradient images using our
-# bitwise OR
-sobelCombined = cv2.bitwise_or(sobelX, sobelY)
+# We can combine our Sobel gradient images using bitwise 'OR'
+sobel_combined = cv2.bitwise_or(sobel_x, sobel_y)
 
 # Show our Sobel images
-cv2.imshow("Sobel X", sobelX)
-cv2.imshow("Sobel Y", sobelY)
-cv2.imshow("Sobel Combined", sobelCombined)
+cv2.imshow("Sobel X", sobel_x)
+cv2.imshow("Sobel Y", sobel_y)
+cv2.imshow("Sobel Combined", sobel_combined)
 cv2.waitKey(0)
