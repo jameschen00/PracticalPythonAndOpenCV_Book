@@ -1,23 +1,13 @@
-# USAGE
-# python grayscale_histogram.py --image ../images/beach.png
-
-# Import the necessary packages
-from matplotlib import pyplot as plt
-import argparse
+import matplotlib.pyplot as plt
 import cv2
 
-# Construct the argument parser and parse the arguments
-ap = argparse.ArgumentParser()
-ap.add_argument("-i", "--image", required = True,
-	help = "Path to the image")
-args = vars(ap.parse_args())
 
-# Load the image, convert it to grayscale, and show it
-image = cv2.imread(args["image"])
+# Load the image, convert it to greyscale, and show it
+image = cv2.imread('C:/PythonProjects/PracticalPythonAndOpenCV_Book/images/beach.png')
 image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 cv2.imshow("Original", image)
 
-# Construct a grayscale histogram
+# Construct a greyscale histogram
 hist = cv2.calcHist([image], [0], None, [256], [0, 256])
 
 # Plot the histogram
